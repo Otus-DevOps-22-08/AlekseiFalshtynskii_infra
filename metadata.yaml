@@ -1,0 +1,23 @@
+#cloud-config
+disable_root: true
+timezone: Europe/Moscow
+repo_update: true
+repo_upgrade: true
+apt:
+  preserve_sources_list: true
+
+users:
+  - name: yc-user
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDGXoTN8zOcVMp6i1ZBgpOSkGeaqaHmPxIYzZC8QONNdT8F5ridOGwKn1WXxKYmc8VrSfq6KtuebWZazL/ozxjn36YA0EHHMLhXnOHU66/P/BpSo62dgnF3hfA/LqouCLNgA89NIy3LPsZlYnkYL0+RjmecZJ3m8SSsKjHrn3HPQlyxW2nHa8CoPjFLyT0oSFkCMsb+ugVcI6CnYogHWG+L+skXmpwQnN1z8Q+J7eC/5PLhRo06ivyZxRL7hzzrJUjhxhLTm7n8nK+oy/JDmcShAFa/xq2kUd/R5fxyUkPGM3lQxV7M/evU2dGP7u/mxoZYVvbaEP94yJTbRyAN0afuhBLCyO+fu6z6JyuzgMpt71yECADuMZwT2UnchZNWvVwIK3UQWGgyKO+EpDIhhYgC0tLubJ+Tm3YVXzCrAbEnvoY4R0IVQKkm785aGwM36HKyn3PqLpVjbv0TPAr/aojc4qM3IWLQ/Ijm8hx9ugh2hg8i81lKNp/rSevReHgLtf0= appuser
+
+runcmd:
+  - [ apt, install, git ]
+  - [ git, clone, -b, cloud-testapp, https://github.com/Otus-DevOps-22-08/AlekseiFalshtynskii_infra.git ]
+  - [ cd, AlekseiFalshtynskii_infra ]
+  - [ install_ruby.sh ]
+  - [ install_mongodb.sh ]
+  - [ deploy.sh ]
