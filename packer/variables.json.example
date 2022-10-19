@@ -1,0 +1,13 @@
+{
+  "service_account_key_file": "files/key.json",
+  "folder_id": "abcdefghijklmnopqrst",
+  "source_image_family": "ubuntu-1604-lts",
+  "image_name": "reddit-base-{{timestamp}}",
+  "image_family": "reddit-base",
+  "use_ipv4_nat": "true",
+  "ssh_username": "ubuntu",
+  "platform_id": "standard-v1",
+  "ruby_script": "scripts/install_ruby.sh",
+  "mongo_script": "scripts/install_mongodb.sh",
+  "reddit_deploy": "scripts/reddit_deploy.sh"
+}

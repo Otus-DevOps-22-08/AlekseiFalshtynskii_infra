@@ -1,0 +1,9 @@
+[Unit]
+Description=Puma HTTP Server
+[Service]
+Type=simple
+WorkingDirectory=/opt/reddit
+ExecStart=/usr/local/bin/puma
+Restart=always
+[Install]
+WantedBy=multi-user.target
