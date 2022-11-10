@@ -1,6 +1,3 @@
-variable "token" {
-  description = "Token"
-}
 variable "cloud_id" {
   description = "Cloud"
 }
@@ -37,10 +34,4 @@ variable "service_account_key_file" {
 variable "count_instances" {
   description = "count of instances"
   default     = "1"
-}
-variable "sa_access_key" {
-  description = "Service account access key"
-}
-variable "sa_secret_key" {
-  description = "Service account secret key"
 }
