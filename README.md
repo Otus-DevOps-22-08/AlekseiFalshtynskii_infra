@@ -1,6 +1,32 @@
 # AlekseiFalshtynskii_infra
 AlekseiFalshtynskii Infra repository
 
+### HW09
+Создан и протестирован плейбук с одним сценарием reddit_app_one_play.yml\
+Создан и протестирован плейбук с отдельными миграциями reddit_app_multiple_plays.yml\
+Созданы и протестированы отдельные плейбуки каждый с одной миграцией, собранные в плейбуке site.yml
+```
+db.yml
+app.yml
+deploy.yml
+```
+Изменены провиженеры packer на использование плейбуков ansible
+```
+packer_db.yml
+packer_app.yml
+```
+Пересозданы образы, пересоздана и протестирована конфигурация terraform stage
+
+★ Автоматическая инвентаризация
+Скачан плагин yc_compute.py и помещен в ~/.ansible/plugins/inventory\
+Создан inventory файл для плагина с настройкой keyed_groups\
+```
+yc.yml
+```
+В db.yml, app.yml, deploy.yml поправлены значения hosts на _reddit_app и _reddit_db соответственно, возвращаемые командой\
+В app.yml параметризировано получение хоста базы данных\
+Настроен ansible.cfg для использования плагина
+
 ### HW08
 Установлен ansible\
 Развернута конфигурация terraform stage, правда с пользователем ubuntu (не appuser)\
