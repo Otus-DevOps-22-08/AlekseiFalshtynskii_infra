@@ -1,0 +1,13 @@
+mock_roles:
+  - jdauphant.nginx
+
+mock_modules:
+  - bundler
+
+skip_list:  # or 'skip_list' to silence them completely
+  - experimental  # all rules tagged as experimental
+  - fqcn[action-core]  # Use FQCN for builtin actions.
+  - jinja[invalid]  # Rule that looks inside jinja2 templates.
+  - meta-incorrect  # meta/main.yml default values should be changed.
+  - meta-no-info  # meta/main.yml should contain relevant info.
+  - yaml[truthy]  # Violations reported by yamllint.

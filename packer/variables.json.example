@@ -9,7 +9,7 @@
   "use_ipv4_nat": "true",
   "ssh_username": "ubuntu",
   "platform_id": "standard-v1",
-  "ruby_script": "scripts/install_ruby.sh",
-  "mongo_script": "scripts/install_mongodb.sh",
-  "reddit_deploy": "scripts/reddit_deploy.sh"
+  "ruby_script": "packer/scripts/install_ruby.sh",
+  "mongo_script": "packer/scripts/install_mongodb.sh",
+  "reddit_deploy": "packer/files/reddit_deploy.sh"
 }

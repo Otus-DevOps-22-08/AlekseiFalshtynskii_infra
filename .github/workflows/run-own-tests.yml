@@ -1,0 +1,103 @@
+name: "Run own tests"
+
+on:
+  push:
+    branches-ignore:
+      - "main"
+  pull_request:
+    branches-ignore:
+      - "main"
+
+env:
+  ANSIBLE_ROLES_PATH: ansible/roles
+
+jobs:
+  packer:
+    name: "Packer validate"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        template:
+          - "app.json"
+          - "db.json"
+          - "immutable.json"
+          - "ubuntu16.json"
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+
+      - name: Prepare varfile
+        uses: canastro/copy-file-action@master
+        with:
+          source: "packer/variables.json.example"
+          target: "packer/variables.json"
+
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: "-var-file=packer/variables.json -syntax-only"
+          target: packer/${{ matrix.template }}
+
+  terraform:
+    name: "Terraform validate"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment:
+          - "prod"
+          - "stage"
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@master
+
+      - name: Prepare varfile
+        uses: canastro/copy-file-action@master
+        with:
+          source: "terraform/${{ matrix.environment }}/terraform.tfvars.example"
+          target: "terraform/${{ matrix.environment }}/terraform.tfvars"
+
+      - name: terraform validate
+        uses: dflook/terraform-validate@v1
+
+  tflint:
+    name: "TFLint"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment:
+          - "prod"
+          - "stage"
+
+    steps:
+      - uses: actions/checkout@master
+        name: Checkout source code
+
+      - uses: terraform-linters/setup-tflint@master
+        name: Setup TFLint
+        with:
+          tflint_version: v0.38.1
+
+      - name: Show version
+        run: tflint --version
+
+      - name: Init TFLint
+        run: tflint --init terraform/${{ matrix.environment }}
+
+      - name: Run TFLint
+        run: tflint -f compact terraform/${{ matrix.environment }}
+
+  ansible:
+    name: Ansible-lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Run ansible-lint
+        uses: ansible-community/ansible-lint-action@main
+        with:
+          path: "ansible/playbooks"
