@@ -1,6 +1,30 @@
 # AlekseiFalshtynskii_infra
 AlekseiFalshtynskii Infra repository
 
+[![Run tests for OTUS homework](https://github.com/Otus-DevOps-22-08/AlekseiFalshtynskii_infra/actions/workflows/run-tests-2022-08.yml/badge.svg)](https://github.com/Otus-DevOps-22-08/AlekseiFalshtynskii_infra/actions/workflows/run-tests-2022-08.yml)
+[![Run own tests](https://github.com/Otus-DevOps-22-08/AlekseiFalshtynskii_infra/actions/workflows/run-own-tests.yml/badge.svg)](https://github.com/Otus-DevOps-22-08/AlekseiFalshtynskii_infra/actions/workflows/run-own-tests.yml)
+
+### HW10
+Созданные плейбуки перенесены в раздельные роли app и db\
+Описаные 2 окружения stage и prod\
+Настроены переменные групп хостов group_vars\
+Файлых предыдущих дз перенесены в каталог ansible/old\
+В ansible.cfg настроено использование окружения по умолчанию\
+Использована коммьютити-роль jdauphant.nginx. Добавлена в игнор-лист, чтобы не коммитить\
+Роль добавлена в app.yml. Обошлось без открытия порта 80 - открыт по умолчанию. Применен плейбук site.yml - проверена доступность приложения по порту 80\
+Использован Ansible Vault для шифрования паролей создаваемых пользователей
+
+★ Динамический inventory
+Использование динамического инвентори "перекочевало" из предыдущего дз - использование плагина yc_compute.py\
+В ansible.cfg указано использование динамического yc.yml по умолчанию
+
+★★ Настроен TravisCI\
+В workflows добавлены собственные тесты run-own-tests.yml
+- packer validate для всех шаблонов
+- terraform validate и tflint для обоих окружений
+- ansible-lint для плейбуков
+- в README.md добавлен бейдж со статусом билдов
+
 ### HW09
 Создан и протестирован плейбук с одним сценарием reddit_app_one_play.yml\
 Создан и протестирован плейбук с отдельными миграциями reddit_app_multiple_plays.yml\

@@ -25,7 +25,7 @@
         },
         {
             "type": "file",
-            "source": "files/puma.service",
+            "source": "packer/files/puma.service",
             "destination": "/tmp/puma.service"
         },
         {
