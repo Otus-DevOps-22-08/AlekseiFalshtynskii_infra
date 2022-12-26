@@ -4,6 +4,25 @@ AlekseiFalshtynskii Infra repository
 [![Run tests for OTUS homework](https://github.com/Otus-DevOps-22-08/AlekseiFalshtynskii_infra/actions/workflows/run-tests-2022-08.yml/badge.svg)](https://github.com/Otus-DevOps-22-08/AlekseiFalshtynskii_infra/actions/workflows/run-tests-2022-08.yml)
 [![Run own tests](https://github.com/Otus-DevOps-22-08/AlekseiFalshtynskii_infra/actions/workflows/run-own-tests.yml/badge.svg)](https://github.com/Otus-DevOps-22-08/AlekseiFalshtynskii_infra/actions/workflows/run-own-tests.yml)
 
+### HW11
+Установлен vagrant\
+Описана локальная инфраструктура в Vagrantfile\
+Дорабатаны роли использованием provisioner в конфигурациях\
+Конфиги ролей и деплоя параметризирован переменной пользователя в extra_vars\
+Для тестирования ролей установлены пакеты molecule и testinfra\
+Версия molecule жестко последняя 2я, в 3й версии много несовместимых изменений внесли\
+Инициирован дефолтный сценарий molecule для тестирования\
+Добавлены два теста из задания\
+Добавлен тест для проверки прослушивания порта mongodb\
+В плейбуках пакера использованы роли app и db\
+Для видимости ролей пакером добавлена ansible_env_vars\
+Корректность конфигураций проверена полным удалением и запуском
+```
+vagrant destroy -f 
+vagrant up
+```
+★ В Vagrant добавлено проксирование nginx для доступности приложения по ip 10.10.10.20
+
 ### HW10
 Созданные плейбуки перенесены в раздельные роли app и db\
 Описаные 2 окружения stage и prod\
